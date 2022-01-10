@@ -264,6 +264,7 @@ def preproc(dossier,num_row):
         cc = credit_card_balance(dossier , num_rows)
         print("Credit card balance df shape:", cc.shape)
         df = df.join(cc, how='left', on='SK_ID_CURR')
+        df.replace([np.inf, -np.inf], np.nan, inplace=True)
         del cc
         gc.collect()
     return df
