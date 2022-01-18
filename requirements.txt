@@ -13,7 +13,7 @@ pathlib==1.0.1
 ipykernel==4.10.1
 threadpoolctl==3.0.0
 pexpect==4.8.0
-sklearn==1.0.2
+sklearn==0.0
 lightgbm==2.2.3
 scipy==1.4.1
 imblearn==0.0
