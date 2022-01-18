@@ -23,9 +23,11 @@ import streamlit as st
 
 
 dossier = 'C:/Users/J45170/Documents/GitHub/git_collab_P7/dashboard/'
+PATH = os.getcwd()+'/'
 
-df = joblib.load( 'df_data_dash.joblib')
-model = joblib.load('gbm.joblib')
+
+df = joblib.load( PATH + 'df_data_dash.joblib')
+model = joblib.load(PATH + 'gbm.joblib')
 feats = [f for f in df.columns if f not in ['TARGET','SKIDCURR','index']]
 
 
