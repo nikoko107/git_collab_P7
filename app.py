@@ -59,7 +59,12 @@ if radio == 'Numéro':
 
 # page pricipale
 
-st.write(input_client)
+st.write('Numero du client : ' , input_client)
+st.write('EXTSOURCE1 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
+st.write('EXTSOURCE2 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
+st.write('EXTSOURCE3 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
+
+
 score_sk = float(model.predict(df[df['SKIDCURR'] == input_client][feats]))
 
 
