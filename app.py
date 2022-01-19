@@ -62,7 +62,7 @@ if radio == 'Numéro':
 data = (df[df['SKIDCURR'] == input_client][feats])
 
 st.write('Numero du client : ' , input_client)
-st.write('EXTSOURCE1 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
+st.write('EXTSOURCE1 Source : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
 
 box_EXTSOURCE1 = st.checkbox('EXTSOURCE1' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool())) )
 
@@ -78,11 +78,11 @@ else:
     data['EXTSOURCE1'] = np.nan
 
 
-st.write('EXTSOURCE2 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
+st.write('EXTSOURCE2 Source: ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
 
 box_EXTSOURCE2 = st.checkbox('EXTSOURCE2' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE2"].isnull().bool())) )
 
-if box_EXTSOURCE1:
+if box_EXTSOURCE2:
     if df[df['SKIDCURR'] == input_client]["EXTSOURCE2"].isnull().bool():
         value_EXTSOURCE2 = 0.0
     else:
@@ -94,8 +94,8 @@ else:
     data['EXTSOURCE2'] = np.nan
 
 
-st.write('EXTSOURCE3 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
-st.write('DAYSEMPLOYED : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
+st.write('EXTSOURCE3 Source : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
+st.write('DAYSEMPLOYED Source : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
 
 
 
