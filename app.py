@@ -62,7 +62,7 @@ if radio == 'Numéro':
 data = (df[df['SKIDCURR'] == input_client][feats])
 
 st.write('Numero du client : ' , input_client)
-st.write('EXTSOURCE1 Source : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
+st.write('EXTSOURCE1 Data : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
 
 box_EXTSOURCE1 = st.checkbox('EXTSOURCE1' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool())) )
 
@@ -78,7 +78,7 @@ else:
     data['EXTSOURCE1'] = np.nan
 
 
-st.write('EXTSOURCE2 Source: ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
+st.write('EXTSOURCE2 Data: ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
 
 box_EXTSOURCE2 = st.checkbox('EXTSOURCE2' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE2"].isnull().bool())) )
 
@@ -94,8 +94,27 @@ else:
     data['EXTSOURCE2'] = np.nan
 
 
-st.write('EXTSOURCE3 Source : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
-st.write('DAYSEMPLOYED Source : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
+st.write('EXTSOURCE3 Data : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
+
+box_EXTSOURCE3 = st.checkbox('EXTSOURCE3' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE3"].isnull().bool())) )
+
+if box_EXTSOURCE3:
+    if df[df['SKIDCURR'] == input_client]["EXTSOURCE3"].isnull().bool():
+        value_EXTSOURCE3 = 0.0
+    else:
+        value_EXTSOURCE3 = float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"])
+    slide_EXTSOURCE3 = st.slider('EXTSOURCE3', min_value = 0.0 , max_value= 1.0 , value = value_EXTSOURCE3)
+    st.write("EXTSOURCE3 : ", slide_EXTSOURCE3)
+    data['EXTSOURCE3'] = slide_EXTSOURCE3
+else:
+    data['EXTSOURCE3'] = np.nan
+
+
+
+
+st.write('DAYSEMPLOYED Data : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
+
+st.write('own car Data : ' , float(df[df['SKIDCURR'] == input_client]["FLAGOWNCAR"]))
 
 
 
@@ -153,4 +172,13 @@ if df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"].isnull().bool():
                   xref="paper", yref="paper" ))
 else:
     fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]), line_color="black")
+st.plotly_chart(fig_4, use_container_width=True)   
+
+
+fig_5 = px.histogram(df,x="FLAGOWNCAR",barmode="group",histnorm='percent')
+if df[df['SKIDCURR'] == input_client]["FLAGOWNCAR"].isnull().bool():
+    fig_4.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée pour ce client",
+                  xref="paper", yref="paper" ))
+else:
+    fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["FLAGOWNCAR"]), line_color="black")
 st.plotly_chart(fig_4, use_container_width=True)   
