@@ -38,7 +38,7 @@ model = pickle.load(open('./pickle/gbm.sav', 'rb'))
 feats = [f for f in df.columns if f not in ['TARGET','SKIDCURR','index']]
 
 
-st.title('Score')
+st.title('Informations client et score crédit ')
 
 input_client = '407942'
 
@@ -46,7 +46,7 @@ input_client = '407942'
 #bandeau de gauche
 
 sb = st.sidebar # add a side bar 
-sb.markdown('**Client:**')
+sb.markdown('**Sélection du client:**')
 np.random.seed(13) # one major change is that client is directly asked as input since sidebar
 client = df['SKIDCURR'].sample(50).sort_values()
 radio = sb.radio('', ['Liste', 'Numéro'])
@@ -59,19 +59,25 @@ if radio == 'Numéro':
 
 # page pricipale
 
+data = df[df['SKIDCURR'] == input_client][feats])
+
 st.write('Numero du client : ' , input_client)
 st.write('EXTSOURCE1 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
 st.write('EXTSOURCE2 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
 st.write('EXTSOURCE3 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
+st.write('DAYSEMPLOYED : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
+
+age = st.slider('How old are you?', 0, 130, 25)
+st.write("I'm ", age, 'years old')
 
 
-score_sk = float(model.predict(df[df['SKIDCURR'] == input_client][feats]))
+score_sk = float(model.predict(data)
 
 
 fig = go.Figure(go.Indicator(
     mode = "gauge+number",
     value = score_sk,
-    title = {'text': "Score"},
+    title = {'text': "Score de solvabilité"},
     domain = {'x': [0, 1], 'y': [0, 1]},
     gauge = {
         'axis': {'range': [None, 1], 'tickwidth': 1, 'tickcolor': "black"},
@@ -113,3 +119,10 @@ else:
     fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]), line_color="black")
 st.plotly_chart(fig_4, use_container_width=True)   
 
+fig_4 = px.histogram(df,x="DAYSEMPLOYED",barmode="group",histnorm='percent')
+if df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"].isnull().bool():
+    fig_4.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée pour ce client",
+                  xref="paper", yref="paper" ))
+else:
+    fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]), line_color="black")
+st.plotly_chart(fig_4, use_container_width=True)   
