@@ -78,7 +78,7 @@ st.write("EXTSOURCE1 : ", slide_EXTSOURCE1)
 
 data['EXTSOURCE1'] = slide_EXTSOURCE1
 
-score_sk = float(model.predict(df[df['SKIDCURR'] == input_client][feats]))
+score_sk = float(model.predict(data))
 
 
 fig = go.Figure(go.Indicator(
