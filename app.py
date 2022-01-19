@@ -112,13 +112,6 @@ else:
 
 st.write('DAYSEMPLOYED Data : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
 
-st.write('own car Data : ' , df[df['SKIDCURR'] == input_client]["FLAGOWNCAR"])
-
-box_EXTSOURCE4 = st.checkbox('Car ' , value = df[df['SKIDCURR'] == input_client]["FLAGOWNCAR"].bool())
-if box_EXTSOURCE4:
-    data['FLAGOWNCAR'] = 1.0
-else:
-    data['FLAGOWNCAR'] = 0.0
 
 
 score_sk = float(model.predict(data)) #calcule du score en dynamique
@@ -176,12 +169,3 @@ if df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"].isnull().bool():
 else:
     fig_5.add_vline(x=float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]), line_color="black")
 st.plotly_chart(fig_5, use_container_width=True)   
-
-
-fig_6 = px.histogram(df,x="FLAGOWNCAR",barmode="group",histnorm='percent')
-if df[df['SKIDCURR'] == input_client]["FLAGOWNCAR"].isnull().bool():
-    fig_6.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée pour ce client",
-                  xref="paper", yref="paper" ))
-else:
-    fig_6.add_vline(x=float(df[df['SKIDCURR'] == input_client]["FLAGOWNCAR"]), line_color="black")
-st.plotly_chart(fig_6, use_container_width=True)   
