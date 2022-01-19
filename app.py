@@ -85,7 +85,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 fig_2 = px.histogram(df,x="EXTSOURCE1",barmode="group",histnorm='percent')
 if df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool():
-    fig_2.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée",
+    fig_2.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée pour ce client",
                   xref="paper", yref="paper" ))
 else:
    fig_2.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]), line_color="black")
@@ -93,10 +93,18 @@ st.plotly_chart(fig_2, use_container_width=True)
 
 
 fig_3 = px.histogram(df,x="EXTSOURCE2",barmode="group",histnorm='percent')
-fig_3.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]), line_color="black")
+if df[df['SKIDCURR'] == input_client]["EXTSOURCE2"].isnull().bool():
+    fig_3.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée pour ce client",
+                  xref="paper", yref="paper" ))
+else:
+    fig_3.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]), line_color="black")
 st.plotly_chart(fig_3, use_container_width=True)   
 
 fig_4 = px.histogram(df,x="EXTSOURCE3",barmode="group",histnorm='percent')
-fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]), line_color="black")
+if df[df['SKIDCURR'] == input_client]["EXTSOURCE3"].isnull().bool():
+    fig_4.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée pour ce client",
+                  xref="paper", yref="paper" ))
+else:
+    fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]), line_color="black")
 st.plotly_chart(fig_4, use_container_width=True)   
 
