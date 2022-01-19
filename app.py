@@ -59,7 +59,7 @@ if radio == 'Numéro':
 
 # page pricipale
 
-data = df[df['SKIDCURR'] == input_client][feats])
+data = (df[df['SKIDCURR'] == input_client][feats])
 
 st.write('Numero du client : ' , input_client)
 st.write('EXTSOURCE1 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
@@ -71,7 +71,8 @@ age = st.slider('How old are you?', 0, 130, 25)
 st.write("I'm ", age, 'years old')
 
 
-score_sk = float(model.predict(data)
+
+score_sk = float(model.predict(df[df['SKIDCURR'] == input_client][feats]))
 
 
 fig = go.Figure(go.Indicator(
