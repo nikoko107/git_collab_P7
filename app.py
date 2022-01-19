@@ -16,6 +16,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 import joblib
+import pickle
+
 
 import matplotlib.pyplot as plt
 import seaborn as sns
