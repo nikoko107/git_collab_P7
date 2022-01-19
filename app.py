@@ -86,7 +86,7 @@ st.plotly_chart(fig, use_container_width=True)
 fig_2 = px.histogram(df,x="EXTSOURCE1",barmode="group",histnorm='percent')
 fig_2.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]), line_color="black")
 fig_2.add_annotation(text="Pas de donnée",
-                  xref="paper", yref="paper" , color="red")
+                  xref="paper", yref="paper" ,size=18, color="crimson")
 st.plotly_chart(fig_2, use_container_width=True)   
 
 
