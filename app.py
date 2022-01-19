@@ -83,16 +83,16 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)    
 
 
-fig_2 = px.histogram(df,x="EXTSOURCES1",barmode="group",histnorm='percent')
-fig_2.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCES1"]), line_color="black")
+fig_2 = px.histogram(df,x="EXTSOURCE1",barmode="group",histnorm='percent')
+fig_2.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]), line_color="black")
 st.plotly_chart(fig_2, use_container_width=True)   
 
 
-fig_3 = px.histogram(df,x="EXTSOURCES2",barmode="group",histnorm='percent')
-fig_3.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCES2"]), line_color="black")
+fig_3 = px.histogram(df,x="EXTSOURCE2",barmode="group",histnorm='percent')
+fig_3.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]), line_color="black")
 st.plotly_chart(fig_3, use_container_width=True)   
 
-fig_4 = px.histogram(df,x="EXTSOURCES3",barmode="group",histnorm='percent')
-fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCES3"]), line_color="black")
+fig_4 = px.histogram(df,x="EXTSOURCE3",barmode="group",histnorm='percent')
+fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]), line_color="black")
 st.plotly_chart(fig_4, use_container_width=True)   
 
