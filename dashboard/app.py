@@ -29,8 +29,10 @@ dossier = 'C:/Users/J45170/Documents/GitHub/git_collab_P7/dashboard/'
 PATH = os.getcwd()+'/'
 
 
-df = joblib.load('df_data_dash.joblib')
-model = joblib.load('gbm.joblib')
+#df = joblib.load('df_data_dash.joblib')
+df = pd.read_pickle("/content/drive/MyDrive/Openclassrooms/P7 scoring/git_collab_P7/git_collab_P7/dashboard/df_data_dash.pkl")
+#model = joblib.load('gbm.joblib')
+model = pickle.load(open(filename, 'rb'))
 feats = [f for f in df.columns if f not in ['TARGET','SKIDCURR','index']]
 
 
