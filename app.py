@@ -84,7 +84,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 fig_2 = px.histogram(df,x="EXTSOURCE1",barmode="group",histnorm='percent')
-if np.isnan(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]):
+if df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull():
     fig_2.add_annotation(dict(font=dict(color='red',size=20),text="Pas de donnée",
                   xref="paper", yref="paper" ))
 else:
