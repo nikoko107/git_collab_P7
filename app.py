@@ -67,16 +67,15 @@ st.write('EXTSOURCE2 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"
 st.write('EXTSOURCE3 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
 st.write('DAYSEMPLOYED : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
 
+box_EXTSOURCE1 = st.checkbox('EXTSOURCE1' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool())) )
 
-#if df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool():
-  #  value_EXTSOURCE1 = 0
-#else:
- #  value_EXTSOURCE1 =float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"])
+if box_EXTSOURCE1:
+    slide_EXTSOURCE1 = st.slider('EXTSOURCE1', min_value = 0.0 , max_value= 1.0 , value = float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
+    st.write("EXTSOURCE1 : ", slide_EXTSOURCE1)
+    data['EXTSOURCE1'] = slide_EXTSOURCE1
+else:
+    data['EXTSOURCE1'] = np.nan
 
-slide_EXTSOURCE1 = st.slider('EXTSOURCE1', min_value = 0.0 , max_value= 1.0 , value = float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
-st.write("EXTSOURCE1 : ", slide_EXTSOURCE1)
-
-data['EXTSOURCE1'] = slide_EXTSOURCE1
 
 score_sk = float(model.predict(data))
 
