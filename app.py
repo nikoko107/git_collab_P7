@@ -46,21 +46,13 @@ input_client = '407942'
 #bandeau de gauche
 
 sb = st.sidebar # add a side bar 
-sb.markdown('**Module?**')
-rad_who = sb.radio('', ['Analyse', 'Score']) # two versions of the app
-# the two versions of the app will have different options, home is common to all
-if rad_who == 'Analyse':
-    sb.markdown('**Type**')
-    rad = sb.radio('', ['univarie', 
-    'bivarié'])
-elif rad_who == 'Score':
-    sb.markdown('**Client:**')
-    np.random.seed(13) # one major change is that client is directly asked as input since sidebar
-    client = df['SKIDCURR'].sample(50).sort_values()
-    radio = sb.radio('', ['Liste', 'Numéro'])
-    if radio == 'Liste': # Choice choose preselected seed13 or a known client ID
-        input_client = sb.selectbox('sélection du client', client)
-    if radio == 'Numéro':
+sb.markdown('**Client:**')
+np.random.seed(13) # one major change is that client is directly asked as input since sidebar
+client = df['SKIDCURR'].sample(50).sort_values()
+radio = sb.radio('', ['Liste', 'Numéro'])
+if radio == 'Liste': # Choice choose preselected seed13 or a known client ID
+    input_client = sb.selectbox('sélection du client', client)
+if radio == 'Numéro':
         input_client = int(sb.text_input('ID', value=407942))
 
 
@@ -91,11 +83,16 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)    
 
 
-fig_2 = px.histogram(df,x="DAYSEMPLOYED",barmode="group",histnorm='percent')
-fig_2.add_vline(x=float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]), line_color="black")
+fig_2 = px.histogram(df,x="EXTSOURCES1",barmode="group",histnorm='percent')
+fig_2.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCES1"]), line_color="black")
 st.plotly_chart(fig_2, use_container_width=True)   
 
 
-fig_3 = px.histogram(df,x="DAYSBIRTH",barmode="group",histnorm='percent')
-fig_3.add_vline(x=float(df[df['SKIDCURR'] == input_client]["DAYSBIRTH"]), line_color="black")
+fig_3 = px.histogram(df,x="EXTSOURCES2",barmode="group",histnorm='percent')
+fig_3.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCES2"]), line_color="black")
 st.plotly_chart(fig_3, use_container_width=True)   
+
+fig_4 = px.histogram(df,x="EXTSOURCES3",barmode="group",histnorm='percent')
+fig_4.add_vline(x=float(df[df['SKIDCURR'] == input_client]["EXTSOURCES3"]), line_color="black")
+st.plotly_chart(fig_4, use_container_width=True)   
+
