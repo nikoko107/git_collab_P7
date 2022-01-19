@@ -63,9 +63,6 @@ data = (df[df['SKIDCURR'] == input_client][feats])
 
 st.write('Numero du client : ' , input_client)
 st.write('EXTSOURCE1 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
-st.write('EXTSOURCE2 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
-st.write('EXTSOURCE3 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
-st.write('DAYSEMPLOYED : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
 
 box_EXTSOURCE1 = st.checkbox('EXTSOURCE1' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool())) )
 
@@ -81,7 +78,28 @@ else:
     data['EXTSOURCE1'] = np.nan
 
 
-score_sk = float(model.predict(data))
+st.write('EXTSOURCE2 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"]))
+
+box_EXTSOURCE2 = st.checkbox('EXTSOURCE2' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE2"].isnull().bool())) )
+
+if box_EXTSOURCE1:
+    if df[df['SKIDCURR'] == input_client]["EXTSOURCE2"].isnull().bool():
+        value_EXTSOURCE2 = 0.0
+    else:
+        value_EXTSOURCE2 = float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"])
+    slide_EXTSOURCE2 = st.slider('EXTSOURCE2', min_value = 0.0 , max_value= 1.0 , value = value_EXTSOURCE2)
+    st.write("EXTSOURCE2 : ", slide_EXTSOURCE2)
+    data['EXTSOURCE2'] = slide_EXTSOURCE2
+else:
+    data['EXTSOURCE2'] = np.nan
+
+
+st.write('EXTSOURCE3 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
+st.write('DAYSEMPLOYED : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
+
+
+
+score_sk = float(model.predict(data)) #calcule du score en dynamique
 
 
 fig = go.Figure(go.Indicator(
