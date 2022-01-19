@@ -70,7 +70,11 @@ st.write('DAYSEMPLOYED : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLO
 box_EXTSOURCE1 = st.checkbox('EXTSOURCE1' , value = np.invert((df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool())) )
 
 if box_EXTSOURCE1:
-    slide_EXTSOURCE1 = st.slider('EXTSOURCE1', min_value = 0.0 , max_value= 1.0 , value = float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
+    if df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool():
+        value_EXTSOURCE1 = 0.0
+    else:
+        value_EXTSOURCE1 = float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"])
+    slide_EXTSOURCE1 = st.slider('EXTSOURCE1', min_value = 0.0 , max_value= 1.0 , value = value_EXTSOURCE1)
     st.write("EXTSOURCE1 : ", slide_EXTSOURCE1)
     data['EXTSOURCE1'] = slide_EXTSOURCE1
 else:
