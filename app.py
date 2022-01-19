@@ -67,10 +67,16 @@ st.write('EXTSOURCE2 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE2"
 st.write('EXTSOURCE3 : ' , float(df[df['SKIDCURR'] == input_client]["EXTSOURCE3"]))
 st.write('DAYSEMPLOYED : ' , float(df[df['SKIDCURR'] == input_client]["DAYSEMPLOYED"]))
 
-age = st.slider('How old are you?', 0, 130, 25)
-st.write("I'm ", age, 'years old')
 
+#if df[df['SKIDCURR'] == input_client]["EXTSOURCE1"].isnull().bool():
+  #  value_EXTSOURCE1 = 0
+#else:
+ #  value_EXTSOURCE1 =float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"])
 
+slide_EXTSOURCE1 = st.slider('EXTSOURCE1', max_value= 1 , value = float(df[df['SKIDCURR'] == input_client]["EXTSOURCE1"]))
+st.write("EXTSOURCE1 : ", slide_EXTSOURCE1)
+
+data['EXTSOURCE1'] = slide_EXTSOURCE1
 
 score_sk = float(model.predict(df[df['SKIDCURR'] == input_client][feats]))
 
